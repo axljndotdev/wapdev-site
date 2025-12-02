@@ -40,9 +40,10 @@ export default function Contact() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Accept": "application/json",
         },
         body: JSON.stringify({
-          access_key: "9b21ba33-f65e-42c4-bc39-fff4d88c3b9f", // Replace with your actual key
+          access_key: "9b21ba33-f65e-42c4-bc39-fff4d88c3b9f",
           name: values.name,
           email: values.email,
           message: values.message,
@@ -51,6 +52,8 @@ export default function Contact() {
       });
 
       const result = await response.json();
+      
+      console.log("Web3Forms response:", result);
 
       if (result.success) {
         toast({
@@ -59,12 +62,13 @@ export default function Contact() {
         });
         form.reset();
       } else {
-        throw new Error("Failed to send message");
+        throw new Error(result.message || "Failed to send message");
       }
     } catch (error) {
+      console.error("Contact form error:", error);
       toast({
         title: "Error",
-        description: "Failed to send message. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to send message. Please try again.",
         variant: "destructive",
       });
     }
