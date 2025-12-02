@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "wapdev-app"
-  }
+    "default": "wapdev-24",
+    "wapdev24": "wapdev-24"
+  },
+  "targets": {},
+  "etags": {}
 }
