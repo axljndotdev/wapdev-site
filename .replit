@@ -7,9 +7,9 @@ channel = "stable-24_05"
 
 [deployment]
 deploymentTarget = "autoscale"
-build = ["sh", "-c", "npm run build"]
+build = ["sh", "-c", "npm run build:client"]
 publicDir = "dist/public"
-run = ["sh", "-c", "npm run start"]
+run = ["sh", "-c", ""]
 
 [[ports]]
 localPort = 5000
@@ -38,6 +38,15 @@ author = "agent"
 task = "shell.exec"
 args = "npm run dev"
 waitForPort = 5000
+
+[[workflows.workflow]]
+name = "Build Static Site"
+author = 50336576
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build:client"
 
 [agent]
 mockupState = "FULLSTACK"
