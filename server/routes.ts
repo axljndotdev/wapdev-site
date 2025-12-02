@@ -20,36 +20,48 @@ export async function registerRoutes(
         return res.status(400).json({ error: "All fields are required" });
       }
 
-      const nodemailer = await import("nodemailer");
+      // Log the submission
+      console.log("📧 Contact Form Submission:");
+      console.log(`   Name: ${name}`);
+      console.log(`   Email: ${email}`);
+      console.log(`   Message: ${message}`);
 
-      const transporter = nodemailer.default.createTransport({
-        service: "gmail",
-        auth: {
-          user: process.env.EMAIL_USER || "wapdev24@gmail.com",
-          pass: process.env.EMAIL_PASSWORD,
-        },
-      });
+      // If email credentials are configured, send the email
+      if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
+        const nodemailer = await import("nodemailer");
 
-      const mailOptions = {
-        from: process.env.EMAIL_USER || "wapdev24@gmail.com",
-        to: "wapdev24@gmail.com",
-        subject: `New Contact Form Submission from ${name}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Message:</strong></p>
-          <p>${message}</p>
-        `,
-        replyTo: email,
-      };
+        const transporter = nodemailer.default.createTransport({
+          service: "gmail",
+          auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASSWORD,
+          },
+        });
 
-      await transporter.sendMail(mailOptions);
+        const mailOptions = {
+          from: process.env.EMAIL_USER,
+          to: process.env.EMAIL_USER, // Send to yourself
+          subject: `New Contact Form Submission from ${name}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Message:</strong></p>
+            <p>${message}</p>
+          `,
+          replyTo: email,
+        };
 
-      res.json({ success: true, message: "Email sent successfully" });
+        await transporter.sendMail(mailOptions);
+        console.log("✅ Email sent successfully");
+      } else {
+        console.log("⚠️  Email credentials not configured. Message logged only.");
+      }
+
+      res.json({ success: true, message: "Message received successfully" });
     } catch (error) {
-      console.error("Error sending email:", error);
-      res.status(500).json({ error: "Failed to send email" });
+      console.error("❌ Error processing contact form:", error);
+      res.status(500).json({ error: "Failed to process message" });
     }
   });
 
