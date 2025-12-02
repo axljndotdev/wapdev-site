@@ -1,87 +1,17 @@
 import { motion } from "framer-motion";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Instagram, Facebook, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
-import { Instagram, Facebook, MessageCircle, Phone } from "lucide-react";
-
-const formSchema = z.object({
-  name: z.string().min(2, "Name is required"),
-  email: z.string().email("Invalid email address"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
 
 export default function Contact() {
-  const { toast } = useToast();
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
-  });
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify({
-          access_key: "9b21ba33-f65e-42c4-bc39-fff4d88c3b9f",
-          name: values.name,
-          email: values.email,
-          message: values.message,
-          subject: `New Contact from ${values.name}`,
-        }),
-      });
-
-      const result = await response.json();
-      
-      console.log("Web3Forms response:", result);
-
-      if (result.success) {
-        toast({
-          title: "Message Sent!",
-          description: "We'll get back to you as soon as possible.",
-        });
-        form.reset();
-      } else {
-        throw new Error(result.message || "Failed to send message");
-      }
-    } catch (error) {
-      console.error("Contact form error:", error);
-      toast({
-        title: "Error",
-        description: error instanceof Error ? error.message : "Failed to send message. Please try again.",
-        variant: "destructive",
-      });
-    }
-  }
-
   const socialLinks = [
     {
       name: "Instagram",
       icon: Instagram,
-      href: "https://instagram.com",
+      href: "https://instagram.com/wapdev",
       color: "hover:text-pink-500",
       bg: "hover:bg-pink-500/10",
       label: "@wapdev",
+      description: "Follow us for updates and portfolio",
     },
     {
       name: "WhatsApp",
@@ -90,16 +20,22 @@ export default function Contact() {
       color: "hover:text-green-500",
       bg: "hover:bg-green-500/10",
       label: "Chat on WhatsApp",
+      description: "Quick response guaranteed",
     },
     {
-      name: "Messenger",
+      name: "Facebook Messenger",
       icon: Facebook,
       href: "https://m.me/",
       color: "hover:text-blue-500",
       bg: "hover:bg-blue-500/10",
-      label: "FB Messenger",
+      label: "Message us on Messenger",
+      description: "Available 24/7",
     },
   ];
+
+  const handleEmailClick = () => {
+    window.location.href = "mailto:wapdev24@gmail.com?subject=Project Inquiry&body=Hi, I would like to discuss a project with you.";
+  };
 
   return (
     <section
@@ -114,129 +50,70 @@ export default function Contact() {
             viewport={{ once: true }}
             className="text-4xl md:text-5xl font-bold text-white mb-4"
           >
-            Let's Build Something Great
+            Let's Connect
           </motion.h2>
-          <p className="text-gray-400 text-lg">
-            Have a project in mind? Get in touch for a free consultation.
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Reach out through your preferred platform. We're active on social media and respond quickly to all inquiries.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
-          {/* Social Links Column */}
+        <div className="max-w-4xl mx-auto">
+          {/* Social Media Links */}
           <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-2 flex flex-col gap-6"
+            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8"
           >
-            <div className="bg-card p-8 rounded-3xl border border-white/5 h-full flex flex-col justify-center">
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Connect With Us
-              </h3>
-              <p className="text-gray-400 mb-8">
-                Prefer a quick chat? Reach out to us directly on your favorite
-                platform.
-              </p>
-
-              <div className="flex flex-col gap-4">
-                {socialLinks.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/5 transition-all duration-300 group ${social.color} ${social.bg}`}
-                  >
-                    <div className="p-2 bg-white/5 rounded-lg group-hover:bg-white/10 transition-colors">
-                      <social.icon size={24} />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-sm text-gray-500 font-medium">
-                        {social.name}
-                      </span>
-                      <span className="text-white font-semibold">
-                        {social.label}
-                      </span>
-                    </div>
-                  </a>
-                ))}
-              </div>
-            </div>
+            {socialLinks.map((social, index) => (
+              <a
+                key={index}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`flex flex-col items-center gap-4 p-8 rounded-3xl bg-card border border-white/5 transition-all duration-300 group ${social.color} ${social.bg} hover:scale-105 hover:shadow-2xl`}
+              >
+                <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-white/10 transition-colors">
+                  <social.icon size={32} />
+                </div>
+                <div className="text-center">
+                  <h3 className="text-white font-semibold text-lg mb-1">
+                    {social.name}
+                  </h3>
+                  <p className="text-gray-400 text-sm mb-1">{social.label}</p>
+                  <p className="text-gray-500 text-xs">{social.description}</p>
+                </div>
+              </a>
+            ))}
           </motion.div>
 
-          {/* Contact Form Column */}
+          {/* Email Button */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-3 bg-card p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl"
+            transition={{ delay: 0.2 }}
+            className="bg-card p-8 rounded-3xl border border-white/5 text-center"
           >
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
+            <div className="flex flex-col items-center gap-4">
+              <div className="p-4 bg-primary/10 rounded-2xl">
+                <Mail size={32} className="text-primary" />
+              </div>
+              <div>
+                <h3 className="text-white font-semibold text-xl mb-2">
+                  Prefer Email?
+                </h3>
+                <p className="text-gray-400 mb-6">
+                  Click below to send us an email directly from your email app
+                </p>
+              </div>
+              <Button
+                onClick={handleEmailClick}
+                className="px-8 py-6 text-lg font-semibold bg-primary hover:bg-primary/90 text-white rounded-xl h-auto"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="John Doe"
-                            {...field}
-                            className="bg-white/5 border-white/20 text-white h-12 focus-visible:ring-primary"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="text-gray-300">Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="john@example.com"
-                            {...field}
-                            className="bg-white/5 border-white/20 text-white h-12 focus-visible:ring-primary"
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <FormField
-                  control={form.control}
-                  name="message"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-gray-300">Message</FormLabel>
-                      <FormControl>
-                        <Textarea
-                          placeholder="Tell us about your project..."
-                          {...field}
-                          className="bg-white/5 border-white/20 text-white min-h-[150px] focus-visible:ring-primary"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-                <Button
-                  type="submit"
-                  className="w-full h-12 text-lg font-semibold bg-primary hover:bg-primary/90 text-white rounded-lg"
-                >
-                  Send Message
-                </Button>
-              </form>
-            </Form>
+                Send Email to wapdev24@gmail.com
+              </Button>
+            </div>
           </motion.div>
         </div>
       </div>
