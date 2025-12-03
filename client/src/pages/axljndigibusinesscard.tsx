@@ -3,6 +3,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Mail, Phone, Globe, Github, Linkedin } from "lucide-react";
 
+// Upwork SVG Icon
+const UpworkIcon = (props) => (
+  <svg {...props} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M17.4 3c-2.3 0-4.2 1.9-4.2 4.2v2.7c-.9-.7-1.8-1.7-2.5-3.2l-.4-1H7.2v6.2c0 1-.8 1.8-1.8 1.8H5v3.3h.4c2.9 0 5.3-2.3 5.4-5.2 1 .9 2.1 1.6 3.4 2v3.1h3.3V7.2c0-1 .8-1.8 1.8-1.8H20V3h-.4c-.9 0-1.7.2-2.3.6-.5-.3-1.1-.4-1.7-.4z" />
+  </svg>
+);
+
 export default function DigitalBusinessCard() {
   const blurredBg =
     "https://raw.githubusercontent.com/sharonpatriarca/assets/main/wapdev-blurred.png";
@@ -81,11 +88,30 @@ END:VCARD`;
             </Card>
           </div>
 
-          <div className="flex gap-10 mt-6 text-white/80">
-            <a href="#" className="hover:text-white transition">
+          {/* Social Icons */}
+          <div className="flex gap-20 mt-6 text-white/80">
+            <a
+              href="https://www.upwork.com/freelancers/~yourprofile"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white transition"
+            >
+              <UpworkIcon className="w-8 h-8" />
+            </a>
+
+            <a
+              href="https://github.com/yourgithub"
+              target="_blank"
+              className="hover:text-white transition"
+            >
               <Github size={30} />
             </a>
-            <a href="#" className="hover:text-white transition">
+
+            <a
+              href="https://linkedin.com/in/yourlinkedin"
+              target="_blank"
+              className="hover:text-white transition"
+            >
               <Linkedin size={30} />
             </a>
           </div>
