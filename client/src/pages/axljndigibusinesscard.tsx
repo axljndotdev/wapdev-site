@@ -38,11 +38,11 @@ export default function DigitalBusinessCard() {
             <CardContent className="p-5 space-y-4 text-white">
               <div className="flex items-center gap-3">
                 <Mail className="w-5 h-5" />
-                <span>axceljohnpatriarca@gmail.com</span>
+                <a href="mailto:axceljohnpatriarca@gmail.com" className="hover:underline">axceljohnpatriarca@gmail.com</a>
               </div>
               <div className="flex items-center gap-3">
                 <Phone className="w-5 h-5" />
-                <span>+63 900 000 0000</span>
+                <a href="tel:+639000000000" className="hover:underline">+63 900 000 0000</a>
               </div>
               <div className="flex items-center gap-3">
                 <Globe className="w-5 h-5" />

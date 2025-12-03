@@ -10,8 +10,8 @@ function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
+      <Route path="/card" component={DigitalBusinessCard} />
       <Route component={NotFound} />
-      <Route component={DigitalBusinessCard} />
     </Switch>
   );
 }
