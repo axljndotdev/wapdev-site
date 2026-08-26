@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [, navigate] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,27 +21,42 @@ export default function Navbar() {
     { name: "Services", href: "#services" },
     { name: "Portfolio", href: "#portfolio" },
     { name: "Contact", href: "#contact" },
+    { name: "Pricing", href: "/pricing" },
   ];
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id.replace("#", ""));
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsOpen(false);
+  const handleClick = (href: string) => {
+    setIsOpen(false); // close mobile menu if open
+
+    if (href.startsWith("#")) {
+      // Section link
+      const element = document.getElementById(href.replace("#", ""));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      // Route link
+      navigate(href);
     }
   };
 
   return (
     <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md border-b border-white/10" : "bg-transparent"
+        scrolled
+          ? "bg-background/80 backdrop-blur-md border-b border-white/10"
+          : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => scrollToSection("hero")}>
+        <div
+          className="flex items-center gap-2 cursor-pointer"
+          onClick={() => handleClick("#hero")}
+        >
           <img src="/logo.png" alt="WAPDEV Logo" className="h-8 w-8" />
-          <span className="text-2xl font-bold tracking-tighter text-white">WAPDEV</span>
+          <span className="text-2xl font-bold tracking-tighter text-white">
+            WAPDEV
+          </span>
         </div>
 
         {/* Desktop Menu */}
@@ -48,14 +64,14 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <button
               key={link.name}
-              onClick={() => scrollToSection(link.href)}
+              onClick={() => handleClick(link.href)}
               className="text-sm font-medium text-gray-300 hover:text-primary transition-colors"
             >
               {link.name}
             </button>
           ))}
-          <button 
-            onClick={() => scrollToSection("contact")}
+          <button
+            onClick={() => handleClick("#contact")}
             className="bg-primary text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-primary/90 transition-colors"
           >
             Get Started
@@ -63,7 +79,10 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Toggle */}
-        <button className="md:hidden text-white" onClick={() => setIsOpen(!isOpen)}>
+        <button
+          className="md:hidden text-white"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
       </div>
@@ -80,7 +99,7 @@ export default function Navbar() {
             {navLinks.map((link) => (
               <button
                 key={link.name}
-                onClick={() => scrollToSection(link.href)}
+                onClick={() => handleClick(link.href)}
                 className="text-lg font-medium text-gray-300 hover:text-primary text-left"
               >
                 {link.name}

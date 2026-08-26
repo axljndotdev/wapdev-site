@@ -1,7 +1,10 @@
 {
   "projects": {
-    "default": "wapdev-24",
-    "wapdev24": "wapdev-24"
+    "default": "wapdev-alpha",
+    "wapdev24": "wapdev-24",
+    "wapdev-alpha": "wapdev-alpha",
+    "wapde-24": "wapdev-24",
+    "wapdev-24": "wapdev-24"
   },
   "targets": {},
   "etags": {}

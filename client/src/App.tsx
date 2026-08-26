@@ -5,12 +5,14 @@ import { Toaster } from "@/components/ui/toaster";
 import Home from "@/pages/Home";
 import NotFound from "@/pages/not-found";
 import DigitalBusinessCard from "@/pages/axljndigibusinesscard";
+import Pricing from "@/pages/pricing";
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/card" component={DigitalBusinessCard} />
+      <Route path="/axceldigitalcard" component={DigitalBusinessCard} />
+      <Route path="/pricing" component={Pricing} />
       <Route component={NotFound} />
     </Switch>
   );

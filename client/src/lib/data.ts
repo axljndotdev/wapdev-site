@@ -3,12 +3,14 @@ import { Code, ShoppingBag, Layers, Monitor, Wrench } from "lucide-react";
 export const services = [
   {
     title: "Custom Website Development",
-    description: "High-performance websites built with React, Next.js, and modern technologies.",
+    description:
+      "High-performance websites built with React, Next.js, and modern technologies.",
     icon: Monitor,
   },
   {
     title: "Shopify & E-commerce",
-    description: "Scalable online stores designed to convert visitors into customers.",
+    description:
+      "Scalable online stores designed to convert visitors into customers.",
     icon: ShoppingBag,
   },
   {
@@ -18,12 +20,14 @@ export const services = [
   },
   {
     title: "Web Apps & SaaS",
-    description: "Complex web applications with robust functionality and user experience.",
+    description:
+      "Complex web applications with robust functionality and user experience.",
     icon: Code,
   },
   {
     title: "Bug Fixing & Maintenance",
-    description: "Ongoing support to keep your digital presence secure and smooth.",
+    description:
+      "Ongoing support to keep your digital presence secure and smooth.",
     icon: Wrench,
   },
 ];
@@ -37,7 +41,8 @@ export const processSteps = [
   {
     step: "02",
     title: "Build",
-    description: "Our developers craft your solution with clean, efficient code.",
+    description:
+      "Our developers craft your solution with clean, efficient code.",
   },
   {
     step: "03",
@@ -49,26 +54,16 @@ export const processSteps = [
 export const portfolioItems = [
   {
     id: 1,
-    title: "Neon Fintech",
+    title: "Bethesda Community Church Website",
     category: "Web App",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop",
+    image:
+      "https://wiot-group.com/storage/2358/responsive-images/Technology-NFC___responsive_1280_853.webp?q=80&w=2070&auto=format&fit=crop",
   },
   {
     id: 2,
-    title: "Luxe Interiors",
+    title: "ChatCart by WAPDEV",
     category: "E-commerce",
-    image: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000&auto=format&fit=crop",
-  },
-  {
-    id: 3,
-    title: "Apex Fitness",
-    category: "Landing Page",
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop",
-  },
-  {
-    id: 4,
-    title: "Crypto Dashboard",
-    category: "SaaS",
-    image: "https://images.unsplash.com/photo-1642104704074-907c0698cbd9?q=80&w=2232&auto=format&fit=crop",
+    image:
+      "https://www.grafterr.com/blog/wp-content/uploads/people-taking-photos-food-1.jpg?q=80&w=2000&auto=format&fit=crop",
   },
 ];
