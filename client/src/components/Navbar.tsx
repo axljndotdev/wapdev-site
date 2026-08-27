@@ -80,7 +80,7 @@ export default function Navbar() {
               (e.target as HTMLElement).style.display = 'none';
             }}
           />
-          <span className="text-2xl font-bold tracking-tighter text-white">
+          <span className="text-xl font-bold tracking-tight text-white group-hover:text-white/90 transition-colors select-none font-sans">
             WAPDEV
           </span>
         </div>

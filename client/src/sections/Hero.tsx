@@ -4,14 +4,66 @@ import { Link } from "wouter";
 
 export default function Hero() {
   return (
-    <section id="hero" className="relative min-h-[92vh] flex items-center justify-center pt-24 pb-20 overflow-hidden">
-      {/* Dynamic Ambient Gradient Background Lights */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] sm:w-[900px] h-[450px] bg-gradient-to-tr from-primary/30 via-purple-600/20 to-indigo-500/10 blur-[130px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute -top-32 -left-32 w-96 h-96 bg-primary/15 blur-[120px] rounded-full pointer-events-none -z-10" />
-      <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-900/20 blur-[140px] rounded-full pointer-events-none -z-10" />
+    <section id="hero" className="relative isolate min-h-[92vh] flex items-center justify-center pt-24 pb-20 overflow-hidden bg-[#030303]">
+      {/* Dynamic Animated Ambient Light Glows */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        {/* Primary Moving Luminous Orb - Center */}
+        <motion.div
+          animate={{
+            x: ["-20%", "20%", "-10%", "-20%"],
+            y: ["-15%", "15%", "-20%", "-15%"],
+            scale: [1, 1.25, 0.9, 1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[750px] md:w-[900px] h-[350px] sm:h-[500px] rounded-full bg-[radial-gradient(circle,rgba(122,92,243,0.55)_0%,rgba(147,51,234,0.3)_40%,rgba(99,102,241,0.12)_70%,transparent_100%)] blur-[90px] sm:blur-[110px]"
+        />
 
-      {/* Subtle Grid Overlay Pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_40%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+        {/* Secondary Drifting Luminous Accent - Top Left to Bottom Right */}
+        <motion.div
+          animate={{
+            x: ["-30px", "120px", "-60px", "-30px"],
+            y: ["0px", "-100px", "80px", "0px"],
+            scale: [0.9, 1.15, 1, 0.9],
+            opacity: [0.6, 0.85, 0.5, 0.6],
+          }}
+          transition={{
+            duration: 14,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+          className="absolute top-1/4 left-1/4 w-[380px] sm:w-[550px] h-[380px] sm:h-[550px] rounded-full bg-[radial-gradient(circle,rgba(168,85,247,0.45)_0%,rgba(122,92,243,0.25)_45%,transparent_80%)] blur-[90px] sm:blur-[120px]"
+        />
+
+        {/* Third Drifting Luminous Accent - Right / Cyan-Indigo Tint */}
+        <motion.div
+          animate={{
+            x: ["30px", "-100px", "50px", "30px"],
+            y: ["-30px", "90px", "-50px", "-30px"],
+            scale: [1, 0.85, 1.2, 1],
+            opacity: [0.5, 0.8, 0.4, 0.5],
+          }}
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            repeatType: "mirror",
+            ease: "easeInOut",
+          }}
+          className="absolute top-1/2 right-1/4 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] rounded-full bg-[radial-gradient(circle,rgba(99,102,241,0.45)_0%,rgba(139,92,246,0.25)_45%,transparent_80%)] blur-[90px] sm:blur-[120px]"
+        />
+
+        {/* Subtle static corner edge auras */}
+        <div className="absolute -top-24 -left-24 w-80 h-80 bg-primary/25 blur-[100px] rounded-full" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-600/25 blur-[120px] rounded-full" />
+
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff07_1px,transparent_1px),linear-gradient(to_bottom,#ffffff07_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_70%,transparent_100%)] opacity-80" />
+      </div>
 
       <div className="container mx-auto px-6 relative z-10 text-center">
         <motion.div
@@ -27,10 +79,7 @@ export default function Hero() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="inline-flex items-center gap-2.5 py-1.5 px-4 rounded-full bg-gradient-to-r from-white/[0.08] via-white/[0.03] to-white/[0.08] border border-white/15 mb-8 backdrop-blur-xl shadow-[0_0_20px_rgba(122,92,243,0.2)]"
           >
-            <img src="/wapdev-logo.png" alt="WAPDEV Logo" className="w-5 h-5 object-contain" />
             <span className="text-white text-xs sm:text-sm font-semibold tracking-wide flex items-center gap-1.5">
-              <span className="text-primary font-bold">WAPDEV</span>
-              <span className="text-gray-500">•</span>
               <span className="text-gray-200">High-Performance Web & Software Development</span>
             </span>
             <Sparkles className="w-3.5 h-3.5 text-primary animate-pulse" />
