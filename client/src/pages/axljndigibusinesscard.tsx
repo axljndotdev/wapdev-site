@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, Globe, Github, Linkedin } from "lucide-react";
 
 // Upwork Logo Component
-const UpworkIcon = (props) => (
+const UpworkIcon = (props: React.ImgHTMLAttributes<HTMLImageElement>) => (
   <img
     {...props}
     src="https://companieslogo.com/img/orig/UPWK.D-ed9fd73c.png?t=1741444949"
@@ -16,8 +16,7 @@ const UpworkIcon = (props) => (
 export default function DigitalBusinessCard() {
   const blurredBg =
     "https://images.unsplash.com/photo-1574790335676-2a2bb9d70d08?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
-  const profileImage =
-    "https://www.upwork.com/profile-portraits/c1WOMwcpOHjFJmeHBwhG3-IQSmpoObUtZBwDhENAp21W7p7HMtmWp-Puv64SqNCQHF";
+  const profileImage = "/profile.png";
 
   const downloadVCard = () => {
     const vcardData = `BEGIN:VCARD
@@ -59,8 +58,9 @@ END:VCARD`;
           <div className="relative z-10">
             <img
               src={profileImage}
-              alt="Profile"
-              className="w-28 h-28 sm:w-32 sm:h-32 rounded-full shadow-lg border-4 border-white/20 object-cover bg-black p-2"
+              alt="Axcel John Patriarca - Web & Software Developer"
+              referrerPolicy="no-referrer"
+              className="w-28 h-28 sm:w-32 sm:h-32 rounded-full shadow-2xl border-4 border-purple-400/50 object-cover bg-black"
             />
           </div>
 
@@ -149,9 +149,13 @@ END:VCARD`;
             Save Contact (.vcf)
           </motion.button>
 
-          <p className="text-purple-300 text-lg mt-8 font-medium z-10 relative">
-            TapLink by Wapdev
-          </p>
+          <a
+            href="/"
+            className="inline-flex items-center gap-2 text-purple-300 hover:text-white text-base mt-8 font-medium z-10 relative transition-colors"
+          >
+            <img src="/wapdev-logo.png" alt="WAPDEV Logo" className="w-5 h-5 object-contain" />
+            TapLink by WAPDEV
+          </a>
         </div>
       </motion.div>
     </div>

@@ -1,0 +1,8 @@
+{
+  "name": "WAPDEV",
+  "description": "Web & Software Development solutions for modern brands, portfolio, and digital business card.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
